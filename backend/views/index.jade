@@ -1,0 +1,214 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description' content='')
+    meta(name='author' content='')
+    title Home
+    // build:css css/main.css
+    link(rel='icon' href='favicon.ico')
+    link(rel='preconnect' href='https://fonts.gstatic.com')
+    link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap' rel='stylesheet')
+    // Bootstrap core CSS
+    // <link href="css/bootstrap.min.css" rel="stylesheet">
+    link(rel='stylesheet' href='node_modules/font-awesome/css/font-awesome.css')
+    link(rel='stylesheet' href='node_modules/bootstrap/dist/css/bootstrap.min.css')
+    // Custom styles for this template
+    link(href='css/style.css' rel='stylesheet')
+    // endbuild
+  body
+    nav.navbar.navbar-dark.sticky-top.flex-md-nowrap.p-0
+      .col-md-3
+        button.btn.add-repo(data-toggle='modal' data-target='#ModalRepos')
+          img(src='img/add-repo.svg')
+          |  Add
+          |         Repository
+      nav.col-md-6.d-flex.align-items-center.justify-content-between(aria-label='breadcrumb')
+        ol.breadcrumb
+          li.breadcrumb-item
+            a(href='#') Choose Folder
+          li.breadcrumb-item
+            a(href='#') Set Titles and Keywords
+          li.breadcrumb-item.active(aria-current='page') Data
+        .nex-pre-buttons
+          button.btn Back
+          button.btn.next(onclick="location.href = 'details.html';") Next
+      .col-md-2
+        a.username
+          p
+            i.icon-user
+      a.username
+      .col-md-1
+        a.username
+        a.nav-link.signout(href='login.html')
+          img(src='img/sign-out.svg')
+          |  Sign Out
+    .container-fluid
+      .row
+        nav.col-md-3.d-none.d-md-block.sidebar
+          .sidebar-sticky
+            #navbarNavDropdown.navbar-collapse
+              ul#RepoList.navbar-nav
+                li.nav-item.dropdown
+                  a.nav-link(href='#' onclick='RepoClick(this);')
+                    | Improving Energy efficiency of Solar Panel cells
+                  ul.dropdown-menu
+                    li
+                      a.dropdown-item(href='#') Solar PV Cell.pdf
+                    li
+                      a.dropdown-item(href='#') Efficiency of Solar.pdf
+                    li
+                      a.dropdown-item(href='#') Related Factors.pdf
+                    li
+                      a.dropdown-item(href='#') Dev PV Cell.pdf
+                    li.sub
+                      a.dropdown-item(href='#') India Solar Cells.pdf
+                      ul.sub-list-box.d-block
+                        li.active
+                          a(href='#') Critical Factors.pdf
+                        li
+                          a(href='#') Improving Energy.pdf
+                        li
+                          a(href='#') Renewable Energy.pdf
+                li.nav-item.dropdown
+                  a.nav-link(href='#' onclick='RepoClick(this);')
+                    | Epidemiology of diabetes
+                  ul.dropdown-menu
+                    li
+                      a.dropdown-item(href='#')
+                        | Incidence and trends of childhood type 1
+                        | diabetes worldwide
+                    li
+                      a.dropdown-item(href='#')
+                        | Diabetes and gender
+                    li
+                      a.dropdown-item(href='#')
+                        | Incidence trends for childhood type 1 diabetes in Europe during
+                        | 1989-2003
+                        | and predicted new cases 2005-20
+                    li
+                      a.dropdown-item(href='#')
+                        | Intake of vitamin D and risk of type 1 diabetes: a birth-cohort
+                        | study
+                li.nav-item.dropdown
+                  a.nav-link(href='#' onclick='RepoClick(this);')
+                    | Unemployment and men's entrance into female dominated jobs
+                  ul.dropdown-menu
+                    li
+                      a.dropdown-item(href='#') Solar PV Cell.pdf
+                    li
+                      a.dropdown-item(href='#') Efficiency of Solar.pdf
+                    li
+                      a.dropdown-item(href='#') Related Factors.pdf
+                    li
+                      a.dropdown-item(href='#') Dev PV Cell.pdf
+        main.main.col-md-9.ml-sm-auto.col-lg-6.pt-3.px-4(role='main')
+          ul#myTab.nav.nav-tabs(role='tablist')
+            li.nav-item
+              a#home-tab.nav-link.active(data-toggle='tab' href='#home' role='tab' aria-controls='home' aria-selected='true') Critical Factors.pdf
+            li.nav-item.arrow-tabs.px-3
+              button.btn
+                img(src='img/left-arrow.svg')
+              button.btn
+                img(src='img/right-arrow.svg')
+            li.nav-item.ml-auto.file-links
+              a(href='#')
+                img(src='img/include.svg')
+                | Include
+              a.open(href='#')
+                | Open File
+                img(src='img/oprn-file.svg')
+          #myTabContent.tab-content
+            #home.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='home-tab')
+              .row.mb-3
+                .col-md-10
+                  span.title-top Title
+                  h5.title-main Critical factors affecting efficiency of solar cells
+                .col-md-2.text-right
+                  span.title-top.text-right Date
+                  h5.title-main.date.text-right 09-06-2020
+              .row.mb-3
+                .col-md-12
+                  span.title-top Keywords
+                  .keywords-list
+                    form#form
+                      input#form-tags-1(name='tags-1' type='text' value='Radiation,Cell Temperature,Efficiency,humidity,Solar cell, PV performance,environment,PV system')
+              .row.mb-3
+                .col-md-12
+                  span.title-top Parameters
+                  .parameters-list
+                    input#para-add.typeInput.py-2.name(placeholder='Type to add new parameter')
+                    input#value-add.typeInput.py-2.num(placeholder='Type Value')
+                    button.btn.para-addbtn Add
+                    ul.Para-addList
+                      li
+                        | Current At MPP 
+                        span.num 8.38 A
+                      li.active
+                        | Maximum power (Pmp) 
+                        span.num 150W
+                      li
+                        | Open circuit voltage (Voc) 
+                        span.num 23.22 V
+                      li
+                        | Short circuit current (Isc) 
+                        span.num 8.90 A
+              .row.methodology
+                .col-md-12
+                  span.title-top Methodology
+                  input.typeInput.my-1(onkeydown='Methodologysearch(this)' placeholder='Type to add new methodology')
+                  #Methodologysearch-c
+                    h5 Heat Exchange Method(HEM)
+        .col-md-3.right-col.p-0
+          .parameter-box
+            h4.title Parameters
+            .list-items
+              form#form
+                input#form-tags-2(name='tags-2' type='text' value='Short circuit current (Isc),Open circuit voltage (Voc),Maximum power (Pmp),Current At MPP')
+          .parameter-box
+            h4.title Methodology
+            input.typeInput(onkeydown='Methodsearch(this)' placeholder='Type to add new Methodology')
+          #Met-container
+            .methodology-HEM-box
+              h5 Heat Exchange Method(HEM)
+    // Modal
+    #ModalRepos.modal.fade(tabindex='-1' role='dialog' aria-labelledby='ModalRepos' aria-hidden='true')
+      .modal-dialog.modal-dialog-centered.modal-lg(role='document')
+        .modal-content
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') ×
+          .modal-body.text-center
+            img.mb-4(src='img/logo.svg')
+            h4.user-title
+              | Logged In as 
+              span.font-weight-bold Jhon Brown
+            .zone
+              #dropzone
+                img.mb-4(src='img/add-folder.svg')
+                div DRAG AND DROP FOLDER HERE
+                span.or-txt OR
+                .selectFile
+                  label(for='file') BROWSE FOLDER
+                  input(type='file' webkitdirectory='')
+    //
+      Bootstrap core JavaScript
+      ==================================================
+    // Placed at the end of the document so the pages load faster
+    //
+      <script src="js/jquery-3.2.1.slim.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    // jQuery first, then Popper.js, then Bootstrap JS.
+    // build:js js/main.js
+    script(src='node_modules/jquery/dist/jquery.min.js')
+    script(src='node_modules/popper.js/dist/umd/popper.min.js')
+    script(src='node_modules/bootstrap/dist/js/bootstrap.min.js')
+    script(src='js/script.js')
+    // endbuild
+    //
+      <script type="text/javascript">
+      $(window).on('load', function () {
+      $('#ModalRepos').modal('show');
+      });
+      </script>

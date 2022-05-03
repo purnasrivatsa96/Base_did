@@ -1291,3 +1291,175 @@ right connector from last child*/
     transform: translate3d(25%, 0, 0);
   }
 }
+.animate--drop-in-fade-out {
+  -webkit-animation: drop-in-fade-out 3.5s 0.4s cubic-bezier(0.32, 1.75, 0.65, 0.91);
+  -moz-animation: drop-in-fade-out 3.5s 0.4s cubic-bezier(0.32, 1.75, 0.65, 0.91);
+  -ms-animation: drop-in-fade-out 3.5s 0.4s cubic-bezier(0.32, 1.75, 0.65, 0.91);
+  -o-animation: drop-in-fade-out 3.5s 0.4s cubic-bezier(0.32, 1.75, 0.65, 0.91);
+  animation: drop-in-fade-out 3.5s 0.4s cubic-bezier(0.32, 1.75, 0.65, 0.91);
+}
+
+.add-repo {
+  margin-left: 5px;
+  background-color: #66a1e4;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 3px;
+  margin: 8px 0;
+  padding: 5px 10px;
+}
+
+.add-repo img {
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+
+.add-paper {
+  margin-left: 5px;
+  background-color: #66a1e4;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 3px;
+  margin: 8px 0;
+  padding: 5px 10px;
+}
+
+.add-paper img {
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Folder Drop Area*/
+.zone {
+  background: #ffffff;
+  border: 2px dashed #b4b4b4;
+  border-radius: 10px;
+  padding: 35px 5px;
+  margin: auto;
+  width: 80%;
+  height: 50%;
+  text-align: center;
+  font-size: 18px;
+  color: #6d6d6d;
+  z-index: 20;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  padding-bottom: 0;
+  margin-bottom: 30px;
+}
+.zone .btnCompression .active {
+  background: #eb6a5a;
+  color: white;
+}
+.zone img {
+  width: 70px;
+}
+.zone .selectFile {
+  height: auto;
+  margin: 20px auto;
+  position: relative;
+  width: 140px;
+}
+.zone label,
+.zone input {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+.zone label {
+  background: #66a1e4;
+  color: #ffffff;
+  display: inline-block;
+  padding: 0;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  height: auto;
+  padding: 5px 15px;
+  width: auto;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.zone input[type="file"] {
+  opacity: 0;
+}
+.zone.in {
+  color: white;
+  border-color: white;
+  background: radial-gradient(ellipse at center, #eb6a5a 0, #c9402f 100%);
+}
+.zone.in i {
+  color: #fff;
+}
+.zone.in label {
+  background: #fff;
+  color: #eb6a5a;
+}
+.zone.hover {
+  color: gray;
+  border-color: white;
+  background: #fff;
+  border: 5px dashed gray;
+}
+.zone.hover i {
+  color: #eb6a5a;
+}
+.zone.hover label {
+  background: #fff;
+  color: #eb6a5a;
+}
+.zone.fade {
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  opacity: 1;
+}
+
+.zone .or-txt {
+  font-size: 14px;
+  margin-top: 15px;
+  display: block;
+}
+
+#ModalRepos .modal-content {
+  background-color: #f4f4f4;
+  border: 0;
+}
+
+#ModalRepos .modal-content .close {
+  float: none;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  z-index: 99;
+}
+
+#ModalRepos .user-title {
+  font-weight: normal;
+  font-size: 14px;
+  text-align: center;
+  color: #5b5b5b;
+  display: block;
+  margin-bottom: 10px;
+}
+
+#form-tags-1_tagsinput {
+  overflow: auto;
+  margin-top: 30px;
+  height: 72px !important;
+}
+
+#form-tags-1_addTag {
+  position: absolute;
+  top: 30px;
+}
+
+.workspace-content {
+  transform-origin: 0 0;
+}

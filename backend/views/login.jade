@@ -1,0 +1,88 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Login
+    link(rel='stylesheet', href='css/main.715da438ad65db4f95aa.css')
+  body
+    #flash-forgot-password.flash
+      .flash__icon
+        i.icon.fa.fa-check-circle-o
+      p.flash__body.mb-0 Reset password email sent!
+    #flash-password-mismatch.flash
+      .flash__icon
+        i.icon.fa.fa-check-circle-o
+      p.flash__body.mb-0 Password not matching!
+    #flash-signup-result.flash
+      .flash__icon
+        i.icon.fa.fa-check-circle-o
+      p.flash__body.mb-0
+    .container.login_container
+      .row
+        .col-md-8.my-auto.text-center
+          img(src='img/logo.svg')
+        .col-md-4
+          .card.loginbox
+            .card-header
+              .tabbable-responsive
+                .tabbable
+                  ul#myTab.nav.nav-tabs(role='tablist')
+                    li.nav-item
+                      a#first-tab.nav-link.active(data-toggle='tab', href='#log_in', role='tab', aria-controls='first', aria-selected='true') Log In
+                    li.nav-item
+                      a#second-tab.nav-link(data-toggle='tab', href='#sign_up', role='tab', aria-controls='second', aria-selected='false') Sign Up
+            .card-body
+              .tab-content
+                #log_in.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='first-tab')
+                  .global-container
+                    .card.login-form
+                      .card-body
+                        .card-text
+                          form
+                            .form-group
+                              label(for='exampleInputEmail1') Email address
+                              |  
+                              input#login-email.form-control.form-control-sm(type='text', aria-describedby='emailHelp', placeholder='someone@yourmail.com')
+                            .form-group
+                              label(for='exampleInputPassword1') Password
+                              |  
+                              input#login-password.form-control.form-control-sm(type='password', placeholder='●●●●●●●●●●')
+                            button.btn.btn-primary.btn-block(type='submit')
+                              a#login-link(href='#') Log in
+                            .sign-up
+                              a#forgot-link(href='#') Forgot Password?
+                #sign_up.tab-pane.fade(role='tabpanel', aria-labelledby='second-tab')
+                  .global-container
+                    .card.login-form
+                      .card-body
+                        .card-text
+                          //
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> 
+                          form#signup-form
+                            // to error: add class "has-danger"
+                            .form-group
+                              label(for='exampleInputEmail1') Email address
+                              |  
+                              input#signup-email.form-control.form-control-sm(type='text', name='username', aria-describedby='emailHelp', placeholder='someone@yourmail.com')
+                            .form-group
+                              label(for='exampleInputPassword1') Password
+                              |  
+                              input#signup-password.form-control.form-control-sm(type='password', name='password', placeholder='●●●●●●●●●●')
+                            .form-group
+                              label(for='exampleInputPassword1') Confirm Password
+                              |  
+                              input#signup-confirm-password.form-control.form-control-sm(type='password', placeholder='●●●●●●●●●●')
+                            button#sign-up-btn.btn.btn-primary.btn-block
+                              a#signup-link(href='#') Sign Up
+    //
+       Bootstrap core JavaScript
+          ==================================================
+    // Placed at the end of the document so the pages load faster
+    //
+      <script src="js/jquery-3.2.1.slim.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    // jQuery first, then Popper.js, then Bootstrap JS.
+    script(src='js/main.4a95ad8006fe94724910.js')
