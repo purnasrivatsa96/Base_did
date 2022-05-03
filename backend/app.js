@@ -1,15 +1,29 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
 var passport = require('passport');
+var authenticate = require('./authenticate');
 var config = require('./config');
 
 
-var indexRouter = require('./routes/index');
+// var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+// var paperRouter = require('./routes/paperRouter');
+// var leaderRouter = require('./routes/leaderRouter');
+// var promoRouter = require('./routes/promoRouter');
+// const uploadRouter = require('./routes/uploadRouter');
+var repositoryRouter = require('./routes/repositoryRouter');
 
 const mongoose = require('mongoose');
+
+// const Papers = require('./models/papers');
+
+const Repositories = require('./models/repositories');
+
 
 const url = config.mongoUrl;
 const connect = mongoose.connect(url);
@@ -41,16 +55,27 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+//app.use(cookieParser('12345-67890-09876-54321'));
+
+
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+// app.use('/papers',paperRouter);
+// app.use('/promotions',promoRouter);
+// app.use('/leaders',leaderRouter);
+// app.use('/imageUpload',uploadRouter);
+app.use('/repositories', repositoryRouter);
 
 
 // catch 404 and forward to error handler
