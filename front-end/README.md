@@ -8,7 +8,7 @@ Components:
   
   index.html - layout for our core base project
   
-  design.html - layout for our final visualization page
+  detail.html - layout for our final visualization page
 
 **CSS - designing and styling of the layout**
 
