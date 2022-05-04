@@ -1,3 +1,7 @@
+/**
+** Functional based progamming logic which has core implementation of BASE
+**/
+
 // Left side repos collapse-expand:
 function RepoClick(elem) {
 	
@@ -8,7 +12,10 @@ function RepoClick(elem) {
 }
 
 
-
+/**
+** Function to get page name
+**	params: url to use
+**/
 function getPageName(url) {
     var index = url.lastIndexOf("/") + 1;
     var filenameWithExtension = url.substr(index);
@@ -17,7 +24,12 @@ function getPageName(url) {
 }
 
 
-
+/**
+** Function to get data
+**	params: url to use
+**	method: GET, POST, DELETE, PUT
+**	callback: function to call on responnse
+**/
 function get_data(url,method,callback){
 	var accessToken = sessionStorage.getItem('token');
 	console.log(accessToken);
@@ -52,6 +64,11 @@ function get_data(url,method,callback){
 
 }
 
+
+/**
+** Function to render index
+**	data: data to pass
+**/
 function render_index(data){
 	data = JSON.parse(data);
 	//console.log(data);
@@ -60,7 +77,7 @@ function render_index(data){
 		$("#flash-index-success-fail").find("p").text("You have no repositories!");
 		$( "#flash-index-success-fail" ).addClass( "animate--drop-in-fade-out" );
 		setTimeout(function(){
-			$( "#flash-index-success-fail" ).removeClass( "animate--drop-in-fade-out" );
+			$( "#flash-index-success-fail" ).removeClass( "animate--drop-in-fade-out" ); // on timeout function to hide component
 		}, 3500);
 	}
 
@@ -88,7 +105,7 @@ function render_index(data){
 						<button class="btn add-paper"><img src="img/add-repo.svg"> Add Paper</button>\
 					</div>\
 				</li>');
-		$('#ModalRepos').modal('hide');
+		$('#ModalRepos').modal('hide'); // appending a layout tag
 
 		// $("#" + repo_id +" ul.dropdown-menu").append('<li><a class="dropdown-item"  href="#">' + paper_name + '</a></li>');
 
@@ -123,6 +140,7 @@ function render_index(data){
 
 }
 
+ // on document ready function and getting values from the store
 
 $( document ).ready(function() {
 	var pageName = getPageName($(location).attr("href"));
@@ -132,7 +150,7 @@ $( document ).ready(function() {
 		$('#index-username').text(sessionStorage.getItem('username'));
 		
 
-		// get values from backend
+		// get values from backend from store
 		if(!sessionStorage.getItem('repositories')){
 			//console.log("aaa");
 			get_data("https://localhost:3443/repositories","GET",render_index);
@@ -177,6 +195,7 @@ $(document).on({
 			$(this).closest("li").addClass("k-active");
 		});
     },
+	// mouse event functions
     mouseleave: function () {
         $.each(keywordsList, function(){
 			$(this).closest("li").removeClass("k-active");
@@ -199,7 +218,7 @@ $(document).on({
     mouseleave: function () {
         $.each(parametersList, function(){
 			$(this).closest(".tab-content").parent("a").removeAttr("style");
-		});
+		}); // mouse event function to remove style
     }
 }, "#form-tags-4_tagsinput .tag");
 
@@ -214,10 +233,10 @@ $(function() {
 });
 
 
-/* jQuery Tags Input Revisited Plugin
- *
- * Copyright (c) Krzysztof Rusnarczyk
- * Licensed under the MIT license */
+/* 
+ *jQuery Tags Input Revisited Plugin
+ * 
+ */
 
 (function($) {
 	var delimiter = [];
@@ -304,19 +323,20 @@ $(function() {
 
 		return false;
 	};
-
+// check for tags
 	$.fn.tagExist = function(val) {
 		var id = $(this).attr('id');
 		var tagslist = $(this).val().split(_getDelimiter(delimiter[id]));
 		return (jQuery.inArray(val, tagslist) >= 0);
 	};
-
+// importing tags
 	$.fn.importTags = function(str) {
 		var id = $(this).attr('id');
 		$('#' + id + '_tagsinput .tag').remove();
 		$.fn.tagsInput.importTags(this, str);
 	};
 
+// passing input to tags
 	$.fn.tagsInput = function(options) {
 		var settings = jQuery.extend({
 			interactive: true,
@@ -335,7 +355,7 @@ $(function() {
 		}, options);
 
 		var uniqueIdCounter = 0;
-
+// validating tags
 		this.each(function() {
 			if (typeof $(this).data('tagsinput-init') !== 'undefined') return;
 
@@ -500,29 +520,22 @@ $(function() {
 
 		return this;
 	};
-	
+// updating tags
 	$.fn.tagsInput.updateTagsField = function(obj, tagslist) {
 		var id = $(obj).attr('id');
 		$(obj).val(tagslist.join(_getDelimiter(delimiter[id])));
 	};
 
+//importing tags
 	$.fn.tagsInput.importTags = function(obj, val) {
-		// console.log("obj");
-		// console.log(obj);
-		// console.log("obj");
 		$(obj).val('');
 		
 		
 		var id = $(obj).attr('id');
 
-		// console.log("id");
-		// console.log(id);
-		// console.log("id");
 
 		var tags = _splitIntoTags(delimiter[id], val); 
-		// console.log("import tags");
-		// console.log(tags);
-		// console.log("import tags");
+	
 		for (i = 0; i < tags.length; ++i) {
 			$(obj).addTag(tags[i], {
 				focus: false,
@@ -536,6 +549,7 @@ $(function() {
 		}
 	};
 	
+// delimiter parsing
 	var _getDelimiter = function(delimiter) {
 		if (typeof delimiter === 'undefined') {
 			return delimiter;
@@ -545,7 +559,8 @@ $(function() {
 			return delimiter[0];
 		}
 	};
-	
+
+// validating tag
 	var _validateTag = function(value, inputSettings, tagslist, delimiter) {
 		var result = true;
 		
@@ -567,6 +582,7 @@ $(function() {
 		return result;
 	};
  
+// check delimiter value
 	var _checkDelimiter = function(event) {
 		var found = false;
 		
@@ -588,7 +604,8 @@ $(function() {
 		
 		return found;
 	 };
-	 
+
+	// split the value into tags using delimiter
 	 var _splitIntoTags = function(delimiter, value) {
 		 if (value === '') return [];
 		 
@@ -610,7 +627,7 @@ $(function() {
 
 	
 	 
-	 
+// handle click function of different components	 
 
 	 $( "#forgot-link" ).click(function() {
 		$( "#flash-forgot-password" ).addClass( "animate--drop-in-fade-out" );
@@ -620,7 +637,9 @@ $(function() {
 
 		
 	  });
-
+	 
+// handle click function of signup link component	 
+	
 	  $( "#signup-link" ).click(function() {
 		if($('#signup-password').val() != $('#signup-confirm-password').val()){
 
@@ -679,7 +698,9 @@ $(function() {
 		}
 	
 	});
-
+	 
+// handle click function of login  component
+	
 	$( "#login-link" ).click(function() {
 		login('https://localhost:3443/users/login','POST',load_index);
 	});
@@ -689,7 +710,14 @@ $(function() {
 	}
 
 	
-	
+/**
+** This function handles login functionality
+**	params:
+**	url: url
+**	method: method
+**	callback: callback
+**/
+
 	function login(url,method,callback){
 			$.ajax({
 				url: url, 
@@ -753,6 +781,13 @@ $(function() {
 	}
 
 	
+/**
+** Function to handle signout functionality
+**	params:
+**	url: url
+**	method: method
+**	callback: callback
+**/
 	
 	function signout(url,method,callback){
 			$.ajax({
@@ -798,71 +833,12 @@ $(function() {
 	}
 	
 
-	//   $("#sign-up-btn").click(function(){        
-	// 	$.post("https://localhost:3443/users/signup", $("#signup-form").serialize(), function(data) {
-	// 		alert(data);
-	// 	});
-	//   });
 
-	//   $( "#sign-up-btn" ).onclick(function() {
-
-	// 	console.log("efaef");
-	// 	console.log($("#signup-email").val());
-	// 	console.log("efaef");
-	// 	console.log($("#signup-password").val());
-		
-	// 	$.post("https://localhost:3443/users/signup",
-	// 	{
-	// 		username: "FDAGDG",
-	// 		password: "FSDGSGSG"
-	// 	},
-	// 	function(data, status){
-	// 		alert("Data: " + data + "\nStatus: " + status);
-	// 	});
-
-
-		// $.ajax({
-		// 	url: 'https://localhost:3443/users/signup', 
-		// 	type: 'POST', 
-		// 	contentType: 'application/json', 
-		// 	dataType: 'json',
-		// 	data: JSON.stringify({"username":"username" ,"password":"password"}),
-		// 	success: function(response){
-		// 		console.log("success");
-		// 	},
-		// 	error: function(response){
-		// 		console.log("response");
-		// 	}
-		// });
-
-		
-
-		
-	
-	//   });
-	
-
-// var dropzone = document.getElementById("dropzone");
-
-// dropzone.addEventListener("drop", function(e) {
-//   e.stopPropagation();
-//   e.preventDefault();
-
-//   RepoName();
-  
-//   var items = event.dataTransfer.items;
-//   for (var i = 0; i < items.length; i++) {
-//     var entry = items[i].webkitGetAsEntry();
-//     if (entry) {
-//       traverse(entry);
-//     }
-//   }
-// }, false);
-
-// dropzone.ondragover = function (e) {
-//   e.preventDefault()
-// }
-
+/** function to get message
+**	params:
+**	response: Response
+**	success: message
+**/
 
 function flash_message(response,success){
 	if(success==true){
@@ -903,6 +879,13 @@ function flash_message(response,success){
 	}
 }
 
+/** function to upload repo
+**	params:
+**	url: URL
+**	method: GET, POST, DELETE
+**	repo name
+**	callback function
+**/	
 function upload_repo(url,method,repo_name,callback){
 	var accessToken = sessionStorage.getItem('token');
 	console.log(accessToken);
@@ -972,6 +955,9 @@ function upload_repo(url,method,repo_name,callback){
 
 }
 
+/**
+**Function to get repository name
+**/
 function RepoName() {
 	var repo_name  = prompt("Please Enter Repository Name", "");
 	
@@ -985,11 +971,20 @@ function RepoName() {
 // 	RepoName();
 // });
 
+	
+// handling click function of add repo button
 $( ".add-repo" ).click(function() {
 	RepoName();
 });
 
-
+/**
+**This function handles uploading research paper to BASE
+** params:
+**	url: URL
+**	method: GET, POST, DELETE, PUT
+** 	repo_id: directory id
+**	paper_name: research paper name
+**/
 function upload_paper(url,method,repo_id,paper_name,callback){
 	var accessToken = sessionStorage.getItem('token');
 	console.log(accessToken);
@@ -1035,7 +1030,7 @@ function upload_paper(url,method,repo_id,paper_name,callback){
 
 			}
 			
-			sessionStorage.setItem('repositories',JSON.stringify(repos_data));
+			sessionStorage.setItem('repositories',JSON.stringify(repos_data)); // saving the value in the store
 			
 
 			
@@ -1053,7 +1048,9 @@ function upload_paper(url,method,repo_id,paper_name,callback){
 	});
 }
 
-
+/**
+**Handles uploading paper to a repo based on repo id
+**/
 function PaperName(repo_id) {
 	var paper_name  = prompt("Please Enter Paper Name", "");
 	
@@ -1063,7 +1060,7 @@ function PaperName(repo_id) {
 	}
 }
 
-
+// handling add paper action
 $(document).on('click', ".add-paper", function() {
 	var repo_id = $(this).closest('.dropdown').attr('id');
 	//console.log(repo_id);
@@ -1096,28 +1093,11 @@ function render_center(repo_id,paper_id) {
 	//set keywords 
 	keywords = paper_data.keywords;
 	console.log(keywords);
-	// var oldval = $('#form-tags-1').val();
-	// // console.log(oldval);
-	// var flag =0;
-	// for(i=0; i<keywords.length; i++){
-	// 	// console.log(keywords[i].name);
-	// 	// console.log(oldval);
-	// 	if(oldval=='' && flag==0){
-	// 		$('#form-tags-1').val( oldval + keywords[i].name); 
-	// 		console.log("dadfd");
-	// 		flag=1;
-	// 	}
-	// 	else{
-	// 		$('#form-tags-1').val(oldval + ","  + keywords[i].name); 
-	// 		console.log("fge");
-	// 	}
-	// }
-	// console.log($('#form-tags-1').val());
-	// $('#form-tags-1').tagsInput();
+
 	$('#form-tags-1').addTag('foo');
 }
 
-
+// handling the dropdown component
 $(document).on('click', ".dropdown-item", function() {
 	var repo_id  = $(this).closest('.dropdown').attr('id');
 	var paper_id = $(this).attr('id');
@@ -1177,6 +1157,7 @@ $(document).ready(function() {
 	
 });
 
+// function to handle focus action
 function setInputFocus(elem){
 	$(elem).focus();
 }
