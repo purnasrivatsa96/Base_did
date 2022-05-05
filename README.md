@@ -1,7 +1,14 @@
 # SE Project: Base
 
+## Prerequisite (Unix: OSX/Linux)
+### Shell
+- OSX:   Terminal (pre-installed)
+- Linux: Terminal (pre-installed)
+### Git
+- Download [here](https://git-scm.com/downloads)
+
 ## Backend Installation (Unix: OSX/Linux)
-### [Install MongoDB](https://www.mongodb.com/docs/manual/installation/)
+### Install [MongoDB](https://www.mongodb.com/docs/manual/installation/)
 ### Clone the repository
 ```
 cd ~
@@ -42,6 +49,11 @@ cd ~/se-project/front-end/
 nvm use 10
 npm install # should create a node_modules directory
 ```
+- Install Grunt
+```
+npm install grunt --save-dev
+```
+
 ## Generate keys (Unix: OSX/Linux)
 - Navigate to bin directory
 ```
@@ -52,11 +64,6 @@ cd ~/se-project/backend/bin
 openssl genrsa 1024 > private.key
 openssl req -new -key private.key -out cert.csr
 openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
-```
-
-## Install Grunt
-```
-npm install grunt --save-dev
 ```
 
 ## Usage
