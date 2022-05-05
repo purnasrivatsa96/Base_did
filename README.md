@@ -8,7 +8,8 @@
 - Download [here](https://git-scm.com/downloads)
 
 ## Backend Installation (Unix: OSX/Linux)
-### Install [MongoDB](https://www.mongodb.com/docs/manual/installation/)
+### Install MongoDB
+- Download [here](https://www.mongodb.com/docs/manual/installation/)
 ### Clone the repository
 ```
 cd ~
@@ -71,7 +72,7 @@ To run the app, open two terminal instances.
 
 In terminal instance 1:
 ```
-~/se-project/front-end
+cd ~/se-project/front-end
 source ~/.nvm/nvm.sh
 nvm use 10
 grunt watch
@@ -79,7 +80,7 @@ grunt watch
 
 In terminal instance 2:
 ```
-~/se-project/backend
+cd ~/se-project/backend
 source ~/.nvm/nvm.sh
 nvm use 10
 npm run watch
