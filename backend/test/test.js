@@ -7,14 +7,14 @@ const supertest = require("supertest");
 
 
 const server = app.listen();
-
+const code = 401;
 afterAll(async () => {
   await app.terminate();
 });
 
 describe('Error', () => {
   const request = supertest(server);
-
+  
   describe('UNKNOWN_ENDPOINT', () => {
     it('<404> should reject the request with no-exist API endpoint', async () => {
       const testCases = [
@@ -106,4 +106,85 @@ describe('Users', () => {
     });
 
   })
+  describe("PUT /repositories", () => {
+    test("Updating repo", async () => {
+      const response = await request
+          .put("/repositories")
+          .set('Content-Type', 'application/json')
+      expect(response.statusCode).toBe(code);
+    });
+  });
+
+  describe("delete /repositories", () => {
+    test("Updating repo", async () => {
+      const response = await request
+          .delete("/repositories")
+      expect(response.statusCode).toBe(code);
+    });
+  });
+
+  describe("post /repositories", () => {
+    test("Updating repo", async () => {
+      const response = await request
+          .post("/repositories")
+      expect(response.statusCode).toBe(code);
+    });
+  });
+
+  describe("put /repositories", () => {
+    test("Updating repo", async () => {
+      const resp1 = await request
+        .post("/users/signup")
+        .set('Content-Type', 'application/json')
+        .send({username: "nivi", password: "aa"});
+        const token = "Bearer " + resp1.token;
+        const resp2 = await request
+        .post("/repositories")
+        .set('Content-Type', 'application/json', 'Authorization', token)
+        .send({username: "nivi", password: "aa"});
+      const response = await request
+          .put("/repositories")
+          .set('Content-Type', 'application/json', 'Authorization', token)
+      expect(response.statusCode).toBe(code);
+    });
+  });
+
+  describe("post /repositories", () => {
+    test("Updating repo", async () => {
+      const resp1 = await request
+        .post("/users/signup")
+        .set('Content-Type', 'application/json')
+        .send({username: "nivi", password: "aa"});
+        const token = "Bearer " + resp1.token;
+        const resp2 = await request
+        .post("/repositories")
+        .set('Content-Type', 'application/json', 'Authorization', token)
+        .send({username: "nivi", password: "aa"});
+      const response = await request
+          .post("/repositories")
+          .set('Content-Type', 'application/json', 'Authorization', token)
+          .send({name: "sampleRepo", user: "nivi", papers: []});
+      expect(response.statusCode).toBe(code);
+    });
+  });
+
+  describe("delete /repositories", () => {
+    test("Updating repo", async () => {
+      const resp1 = await request
+        .post("/users/signup")
+        .set('Content-Type', 'application/json')
+        .send({username: "nivi", password: "aa"});
+        const token = "Bearer " + resp1.token;
+        const resp2 = await request
+        .post("/repositories")
+        .set('Content-Type', 'application/json', 'Authorization', token)
+        .send({username: "nivi", password: "aa"});
+      const response = await request
+          .delete("/repositories")
+          .set('Content-Type', 'application/json', 'Authorization', token)
+          .send({name: "sampleRepo", user: "nivi", papers: []});
+      expect(response.statusCode).toBe(code);
+    });
+  });
 });
+
