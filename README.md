@@ -1,4 +1,4 @@
-# se-project1) Unzip frontend and backend into same folder
+# se-project1) Unzip frontend and backend into same folder\\
 2)make sure you node version 10
     I)MAC - one time installation(backend/conFusionServer) - go to backend/conFusionServer folder
     a)install nvm :- "brew install nvm"

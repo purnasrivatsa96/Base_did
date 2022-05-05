@@ -69,7 +69,7 @@ module.exports = function(grunt){
 					files: [{
 					  cwd: 'dist',  // set working folder / root to copy
 					  src: ['**/*'],           // copy all files and subfolders
-					  dest: '../../backend/conFusionServer/public',    // destination folder
+					  dest: '../backend/public',    // destination folder
 					  expand: true           // required when using cwd
 					}]
 				  }

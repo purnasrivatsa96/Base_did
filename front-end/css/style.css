@@ -80,9 +80,13 @@ body {
 .main .tab-content .parameters-list,
 .main .tab-content .keywords-list {
   padding: 16px;
-  background: #f8fafd;
+  /* background: #f8fafd; */
+  /* background: #75a3e8; */
   border-radius: 5px;
+  color: #870f11;
+
 }
+
 
 .main .tab-content .keywords-list .keywords-parent {
   height: 72px;
@@ -115,12 +119,14 @@ body {
   padding: 5px 10px;
   font-size: 14px;
   color: #fff;
+  /* color: rgb(113, 33, 119); */
   border-radius: 3px;
   margin-left: 5px;
 }
 
 .parameters-list input::placeholder {
-  color: #afafaf;
+  /* color: #afafaf; */
+  color: #870f11;
 }
 
 .main.zoom-sec .tab-content {
@@ -139,12 +145,14 @@ body {
 .parameters-list ul li {
   list-style-type: none;
   display: inline-block;
-  background: rgba(102, 161, 228, 0.2);
+  /* background: rgba(102, 161, 228, 0.2); */
+  background: rgba(101, 230, 165, 0.2);
   border: 1px solid rgba(102, 161, 228, 0.2);
   border-radius: 50px;
   padding: 3px;
   font-size: 14px;
   color: #66a1e4;
+  color: #870f11;
   font-weight: 500;
   padding-left: 10px;
   margin-bottom: 5px;
@@ -152,7 +160,8 @@ body {
 }
 
 .parameters-list ul li.active {
-  background: #66a1e4;
+  /* background: #66a1e4; */
+  background: #30d4a3;
   color: #fff;
 }
 
@@ -162,6 +171,7 @@ body {
   color: #66a1e4;
   font-weight: 500;
   text-align: center;
+  /* background: #ffffff; */
   background: #ffffff;
   border: 1px solid rgba(102, 161, 228, 0.5);
   border-radius: 50px;
@@ -864,22 +874,26 @@ right connector from last child*/
   outline: 0;
 }
 .tagsinput .tag {
-  background: #e2edfa;
+  /* background: #e2edfa; */
+  background: #30d4a3;
   border-radius: 2px;
   position: relative;
   display: block;
   max-width: 100%;
   word-wrap: break-word;
-  color: #66a1e4;
+  /* color: #66a1e4; */
+  color: #870f11;
   font-size: 14px;
   font-weight: 500;
   padding: 5px 30px 5px 10px;
   margin: 0 5px 5px 0;
 }
 .list-items .tagsinput .tag {
-  background: #66a1e4;
+  /* background: #66a1e4; */
+  background: #30d4a3;
   border-radius: 50px;
-  color: #fff;
+  /* color: #fff; */
+  color: #870f11;
 }
 .keywords-list .tagsinput .tag {
   display: block;
@@ -1032,7 +1046,8 @@ right connector from last child*/
 }
 
 .login_container .login-form button {
-  background: #66a1e4;
+  /* background: #66a1e4; */
+  background: #66e4e4;
   border: 0;
   box-shadow: 0px 2px 50px rgba(0, 0, 0, 0.05);
   border-radius: 3px;
@@ -1450,13 +1465,16 @@ right connector from last child*/
 }
 
 #form-tags-1_tagsinput {
+  
   overflow: auto;
   margin-top: 30px;
   height: 72px !important;
 }
 
 #form-tags-1_addTag {
+  color: #66e4e4;
   position: absolute;
+  /* background: #30d4a3; */
   top: 30px;
 }
 
