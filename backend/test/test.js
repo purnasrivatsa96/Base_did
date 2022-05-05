@@ -53,21 +53,57 @@ describe('Error', () => {
 describe('Users', () => {
 
   const request = supertest(server);
-  beforeEach((done) => { //Before each test we empty the database
+  beforeAll((done) => { //Before each test we empty the database
     Users.remove({}, (err) => {
       done();
     });
   });
 
-  describe("GET /users", () => {
-    test("It responds with an array of students", async () => {
+  describe("Sign up", () => {
+    test("Create new account", async () => {
       const response = await request
           .post("/users/signup")
           .set('Content-Type', 'application/json')
-          .send({username: "abhinav", password: "111"});
-      // console.log(response.body);
+          .send({username: "abhinav", password: "111"})
+          .expect(200);
+      // console.log(response.header);
       expect(response.body.status).toBe('Registration Successful!');
       expect(response.body.success).toBe(true);
     });
+  })
+  var token = null
+  describe("Log in", () => {
+    test("Log in user fail", async () => {
+      const response = await request
+          .post("/users/login")
+          .set('Content-Type', 'application/json')
+          .send({username: "abhinav2", password: "111"})
+          .expect(401);
+      // token = response.body.token
+      expect(response.body.status).toBe('Login Unsuccessful!');
+      expect(response.body.success).toBe(false);
+    });
+    test("Log in user", async () => {
+      const response = await request
+          .post("/users/login")
+          .set('Content-Type', 'application/json')
+          .send({username: "abhinav", password: "111"})
+          .expect(200);
+      // token = response.body.token
+      expect(response.body.status).toBe('Login Successful!');
+      expect(response.body.success).toBe(true);
+    });
+
+  })
+
+  describe("Log out", () => {
+    test("Log out user", async () => {
+      const response = await request
+          .get("/users/logout");
+      // token = response.body.token
+      expect(response.statusCode).toBe(200);
+      expect(response.body.status).toBe('Bye!');
+    });
+
   })
 });
