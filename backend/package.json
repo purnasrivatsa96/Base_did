@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "test": "jest"
+  },
+  "directories": {
+    "test": "test"
   },
   "dependencies": {
+    "body-parser": "^1.20.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.9",
@@ -27,11 +32,16 @@
     "session-file-store": "^1.2.0"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "connect-livereload": "^0.6.1",
+    "jest": "^20.0.0",
     "lite-server": "^2.6.1",
     "livereload": "^0.9.3",
+    "mocha": "^8.0.0",
     "nodemon": "^2.0.7",
     "onchange": "^3.3.0",
-    "parallelshell": "^3.0.2"
+    "parallelshell": "^3.0.2",
+    "supertest": "^6.2.3"
   }
 }
