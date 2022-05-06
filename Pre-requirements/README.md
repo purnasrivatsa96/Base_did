@@ -1,3 +1,6 @@
+
+**Project Management**
+
 **Scrum Methodology:**
 
 As Scrum uses a sprint structure so we estimated all the sprints and their delivery dates in advance. This helps us to get the exact dates of delivery so we can plan his strategy accordingly.
