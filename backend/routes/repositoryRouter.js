@@ -18,20 +18,15 @@ repositoryRouter.route('/')
         .populate('user')
         .then((repositories) => {
             console.log(req.user.id);
-            // extract repositories that match the req.user.id
+            // find repositories that match the req.user.id
+            // else return error message
             if (repositories) {
-                
                 user_repositories = repositories.filter(repo => repo.user._id.toString() === req.user.id.toString());
                 
                 if(!user_repositories) {
                     var err = new Error('You have no repositories!');
                     err.status = 404;
                     return next(err);
-
-                    // res.statusCode = 404;
-                    // res.setHeader('Content-Type', 'application/json');
-                    // res.json({success: false, status: 'Could not fetch repositories'});
-                    // return;
                 }
                 res.statusCode = 200;
                 res.setHeader("Content-Type", "application/json");
@@ -45,7 +40,7 @@ repositoryRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err));
 })
-
+// create new repository
 .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     Repositories.create(req.body)
     .then((repository) => {
@@ -61,6 +56,7 @@ repositoryRouter.route('/')
     res.statusCode = 403;
     res.end('PUT operation is not supported on /repositories');
 })
+    // delete existing repository if available
 .delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     Repositories.find({})
         .populate('user')
@@ -92,26 +88,23 @@ repositoryRouter.route('/')
 });
 
 
-
+// find repository by id
 repositoryRouter.route('/:repositoryId')
 .options(cors.corsWithOptions,(req,res) => { res.sendStatus(200); })
 .get(cors.cors, authenticate.verifyUser, (req,res,next) => {
     Repositories.findById(req.params.repositoryId)
     .populate('user')
     .then((repository) => {
-        if (repository != null && repository.user._id.toString() != req.user.id.toString()) {
-            
+        if (repository != null && repository.user._id.toString() !== req.user.id.toString()) {
             err = new Error('You are not authorized to view this repository');
             err.status = 403;
             return next(err);
         }
-            
         else if (repository == null) {
             err = new Error('Repository ' + req.params.repositoryId + ' not found');
             err.status = 404;
             return next(err);
         }
-        
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(repository);           
@@ -123,6 +116,7 @@ repositoryRouter.route('/:repositoryId')
     res.statusCode = 403;
     res.end('POST operation not supported on /repositories/'+ req.params.repoId);
 })
+    // update existing repository by id
 .put(cors.corsWithOptions, authenticate.verifyUser, 
     (req, res, next) => {
         Repositories.find({})
@@ -192,7 +186,7 @@ repositoryRouter.route('/:repositoryId')
 })
 
 
-//papers
+//get all papers for specific repository
 repositoryRouter.route('/:repositoryId/papers')
 .options(cors.corsWithOptions,(req,res) => { res.sendStatus(200); })
 .get(cors.cors, authenticate.verifyUser, (req,res,next) => {
@@ -219,6 +213,7 @@ repositoryRouter.route('/:repositoryId/papers')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
+    //add new papers to existing repository
 .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     Repositories.findById(req.params.repositoryId)
     .populate('user')
