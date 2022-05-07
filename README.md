@@ -1,4 +1,6 @@
-# SE Project: Base
+# CS 5704 Software Engineering Project
+
+# BASE -A Colloborative Tool for Researchers
 
 ## Prerequisite (Unix: OSX/Linux)
 ### Shell
