@@ -21,6 +21,7 @@ router.get('/',cors.corsWithOptions, authenticate.verifyUser, authenticate.verif
   })
 });
 
+// add new user with username and password
 router.post('/signup',cors.corsWithOptions,  (req, res, next) => {
   console.log("sign up request");
   User.register(new User({username: req.body.username}), 
@@ -52,17 +53,8 @@ router.post('/signup',cors.corsWithOptions,  (req, res, next) => {
   });
 });
 
-// router.post('/login',cors.corsWithOptions,  passport.authenticate('local'), (req, res) => {
 
-//   var token = authenticate.getToken({_id: req.user._id});
-//   res.statusCode = 200;
-//   res.setHeader('Content-Type', 'application/json');
-//   res.json({success: true, token: token, status: 'You are successfully logged in!'});
-// });
-
-
-
-
+// login user with username and password
 router.post('/login', cors.corsWithOptions, (req, res, next) => {
 
   passport.authenticate('local', (err, user, info) => {
@@ -92,21 +84,12 @@ router.post('/login', cors.corsWithOptions, (req, res, next) => {
   }) (req, res, next);
 });
 
+// logout user from the session
 router.get('/logout', cors.corsWithOptions, function(req, res) {
   req.logout();
 res.status(200).json({
   status: 'Bye!'
 });
 });
-
-
-// router.get('/facebook/token', passport.authenticate('facebook-token'), (req, res) => {
-//   if (req.user) {
-//     var token = authenticate.getToken({_id: req.user._id});
-//     res.statusCode = 200;
-//     res.setHeader('Content-Type', 'application/json');
-//     res.json({success: true, token: token, status: 'You are successfully logged in!'});
-//   }
-// });
 
 module.exports = router;

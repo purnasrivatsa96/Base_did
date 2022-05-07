@@ -12,7 +12,7 @@ const repositoryRouter = express.Router();
 repositoryRouter.use(bodyParser.json()); // repo routing
 /**
  * On navigating to home page it will fetch repositories from database
- * 
+ *
  */
 repositoryRouter.route('/')
 .options(cors.corsWithOptions,(req,res) => { res.sendStatus(200); })
@@ -21,11 +21,13 @@ repositoryRouter.route('/')
         .populate('user')
         .then((repositories) => {
             console.log(req.user.id);
-            // extract repositories that match the req.user.id
+            // find repositories that match the req.user.id
+            // else return error message
             if (repositories) {
-                
+                user_repositories = repositories.filter(repo => repo.user._id.toString() === req.user.id.toString());
+
                 user_repositories = repositories.filter(repo => repo.user._id.toString() === req.user.id.toString()); // fetching repositories
-                
+
                 if(!user_repositories) { // when there is no repositories
                     var err = new Error('You have no repositories!');
                     err.status = 404;
@@ -57,11 +59,12 @@ repositoryRouter.route('/')
         res.json(repository);
     }, (err) => next(err))
     .catch((err) => next(err));
-}) 
+})
 .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => { // updating repositories **yet to be implemented**
     res.statusCode = 403;
     res.end('PUT operation is not supported on /repositories');
 })
+    // delete existing repository if available
 .delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => { // Delete repository on DELETE Method call
     Repositories.find({})
         .populate('user')
@@ -114,7 +117,6 @@ repositoryRouter.route('/:repositoryId')
             err.status = 404;
             return next(err);
         }
-        
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(repository);           
@@ -210,7 +212,7 @@ repositoryRouter.route('/:repositoryId/papers')
             err.status = 403;
             return next(err);
         }
-         // when not authorized   
+         // when not authorized
         else if (repository == null) {
             err = new Error('Repository ' + req.params.repositoryId + ' not found');
             err.status = 404;

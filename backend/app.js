@@ -38,14 +38,7 @@ var app = express();
 
 // Secure traffic only
 app.all('*', (req, res, next) => {
-  console.log('wwrgrwrwg');
-  // if (req.secure) {
     return next();
-  // }
-  // else {
-  //
-  //   res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
-  // }
 });
 
 // view engine setup
@@ -69,12 +62,6 @@ app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-// app.use('/papers',paperRouter);
-// app.use('/promotions',promoRouter);
-// app.use('/leaders',leaderRouter);
-// app.use('/imageUpload',uploadRouter);
 app.use('/repositories', repositoryRouter);
 
 
