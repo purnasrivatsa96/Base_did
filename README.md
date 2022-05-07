@@ -2,6 +2,9 @@
 
 # BASE -A Colloborative Tool for Researchers
 
+
+The software solution we developed called BASE will aid researchers in organizing their work in a shared virtual area and collaborating more effectively with others. BASE - An online collaboration tool allows scholars to cooperate and access team members' research and notes in a number of ways.
+
 ## Prerequisite (Unix: OSX/Linux)
 ### Shell
 - OSX:   Terminal (pre-installed)
