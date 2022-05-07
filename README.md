@@ -75,6 +75,8 @@ cd backend
 npm test
 ```
 
+![Unit Test expected output](test_images/Dragster.png)
+
 To run the app, open two terminal instances.
 
 In terminal instance 1:
