@@ -15,12 +15,12 @@
 ### Clone the repository
 ```
 cd ~
-gh repo clone purnasrivatsa96/se-project
+gh repo clone purnasrivatsa96/Base-Research-tool
 ```
 ### Install Node (Version >= 10)
 - Navigate backend directory in the repository
 ```
-cd ~/se-project/backend/
+cd ~/Base-Research-tool/backend/
 ```
 - Install NVM
 ```
@@ -45,7 +45,7 @@ npm install # should create a node_modules directory
 ## Frontend Installation (Unix: OSX/Linux)
 - Navigate frontend directory in the repository
 ```
-cd ~/se-project/front-end/
+cd ~/Base-Research-tool/front-end/
 ```
 - Install required packages
 ```
