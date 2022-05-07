@@ -75,7 +75,7 @@ cd backend
 npm test
 ```
 
-![Unit Test expected output](test_images/Dragster.png)
+![Unit Test expected output](https://github.com/purnasrivatsa96/Base-Research-tool/blob/main/test_images/test_output.png)
 
 ## How to run the app
 To run the app, open two terminal instances.
