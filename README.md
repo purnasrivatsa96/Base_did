@@ -72,7 +72,6 @@ To run the test cases:
 
 ```
 cd backend
-npm install --save-dev jest@20.0.0
 npm test
 ```
 
@@ -98,6 +97,15 @@ npm run watch
 ```
 
 Visit `https://localhost:3443/login` in web-browser.
+
+## Specifc use case example
+
+Use case - Create repository.
+1. First login from the login page with valid credentials or signup if you do not have credentials
+2. You will be redirected to dashboard page.
+3. Click on add repository button on top left.
+4. Give a repository name in the popup and click "ok"
+5. The repository will be added and shown in the left side bar.
 
 ## Support
 For any program-specific support, please contact any of the following:
