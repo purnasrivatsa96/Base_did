@@ -68,6 +68,13 @@ openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
 ```
 
 ## Usage
+To run the test cases:
+
+```
+cd backend
+npm test
+```
+
 To run the app, open two terminal instances.
 
 In terminal instance 1:
