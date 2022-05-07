@@ -72,6 +72,7 @@ To run the test cases:
 
 ```
 cd backend
+npm install --save-dev jest@20.0.0
 npm test
 ```
 
