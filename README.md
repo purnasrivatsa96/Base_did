@@ -76,6 +76,7 @@ To run the test cases:
 cd backend
 npm test
 ```
+The test case output should look like this:
 
 ![Unit Test expected output](https://github.com/purnasrivatsa96/Base-Research-tool/blob/main/test_images/test_output.png)
 
