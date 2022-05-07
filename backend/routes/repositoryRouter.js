@@ -9,8 +9,11 @@ const Repositories = require('../models/repositories');
 
 const repositoryRouter = express.Router();
 
-repositoryRouter.use(bodyParser.json());
-
+repositoryRouter.use(bodyParser.json()); // repo routing
+/**
+ * On navigating to home page it will fetch repositories from database
+ *
+ */
 repositoryRouter.route('/')
 .options(cors.corsWithOptions,(req,res) => { res.sendStatus(200); })
 .get(cors.cors, authenticate.verifyUser, (req, res, next) => {
@@ -22,16 +25,19 @@ repositoryRouter.route('/')
             // else return error message
             if (repositories) {
                 user_repositories = repositories.filter(repo => repo.user._id.toString() === req.user.id.toString());
-                
-                if(!user_repositories) {
+
+                user_repositories = repositories.filter(repo => repo.user._id.toString() === req.user.id.toString()); // fetching repositories
+
+                if(!user_repositories) { // when there is no repositories
                     var err = new Error('You have no repositories!');
                     err.status = 404;
                     return next(err);
+
                 }
                 res.statusCode = 200;
                 res.setHeader("Content-Type", "application/json");
                 res.json(user_repositories);
-            } else {
+            } else { // when there is no repositories
                 var err = new Error('There are no repositories');
                 err.status = 404;
                 return next(err);
@@ -40,7 +46,9 @@ repositoryRouter.route('/')
         }, (err) => next(err))
         .catch((err) => next(err));
 })
-// create new repository
+ /**
+  * Adding new repositories
+  */
 .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     Repositories.create(req.body)
     .then((repository) => {
@@ -52,12 +60,12 @@ repositoryRouter.route('/')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+.put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => { // updating repositories **yet to be implemented**
     res.statusCode = 403;
     res.end('PUT operation is not supported on /repositories');
 })
     // delete existing repository if available
-.delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+.delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => { // Delete repository on DELETE Method call
     Repositories.find({})
         .populate('user')
         .then((repositories) => {
@@ -67,7 +75,7 @@ repositoryRouter.route('/')
             } 
             if(repoToRemove.length > 0 ){
                 var ids_to_remove = [];
-                repoToRemove.forEach(function(item) {
+                repoToRemove.forEach(function(item) { // removing deleted repository
                     ids_to_remove.push(item._id);
                 })
                 Repositories.deleteMany({ _id: ids_to_remove })
@@ -87,20 +95,24 @@ repositoryRouter.route('/')
         .catch((err) => next(err));
 });
 
+/**
+ * navigating to the repo with the given repo id
+ */
 
-// find repository by id
 repositoryRouter.route('/:repositoryId')
 .options(cors.corsWithOptions,(req,res) => { res.sendStatus(200); })
 .get(cors.cors, authenticate.verifyUser, (req,res,next) => {
     Repositories.findById(req.params.repositoryId)
     .populate('user')
     .then((repository) => {
-        if (repository != null && repository.user._id.toString() !== req.user.id.toString()) {
+        if (repository != null && repository.user._id.toString() != req.user.id.toString()) { // checking for permission
+            
             err = new Error('You are not authorized to view this repository');
             err.status = 403;
             return next(err);
         }
-        else if (repository == null) {
+            
+        else if (repository == null) { // repo is not available
             err = new Error('Repository ' + req.params.repositoryId + ' not found');
             err.status = 404;
             return next(err);
@@ -112,25 +124,24 @@ repositoryRouter.route('/:repositoryId')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-.post(cors.corsWithOptions, authenticate.verifyUser,authenticate.verifyAdmin, (req, res, next) => {
+.post(cors.corsWithOptions, authenticate.verifyUser,authenticate.verifyAdmin, (req, res, next) => { // post operation based on repo id is not yet implemented
     res.statusCode = 403;
     res.end('POST operation not supported on /repositories/'+ req.params.repoId);
 })
-    // update existing repository by id
-.put(cors.corsWithOptions, authenticate.verifyUser, 
+.put(cors.corsWithOptions, authenticate.verifyUser, // updating based on repo id
     (req, res, next) => {
         Repositories.find({})
             .populate('user')
             .then((repositories) => {
                 var user;
-                if(repositories){
+                if(repositories){ // checking for repositories
                     user = repositories.filter(repo => repo.user._id.toString() === req.user.id.toString())[0];
-                if(!user) {
+                if(!user) { // when repo is not there
                     var err = new Error('You have no Repositories!');
                     err.status = 404;
                     return next(err);
                 }
-                Repositories.findByIdAndUpdate(req.params.repositoryId, {
+                Repositories.findByIdAndUpdate(req.params.repositoryId, { // find repo based on repo id and update it
                     $set: req.body
                 }, { new: true })
                 .populate('user')
@@ -141,7 +152,7 @@ repositoryRouter.route('/:repositoryId')
                 }, (err) => next(err));
                 
             }
-            else{
+            else{ // when repo doesn't exist
                 var err = new Error('There are no repositories');
                 err.status = 404;
                 return next(err);
@@ -151,21 +162,23 @@ repositoryRouter.route('/:repositoryId')
             }, (err) => next(err))
             .catch((err) => next(err));
 })
-
+/**
+ * delete repo based on repo id
+ */
 .delete(cors.corsWithOptions, authenticate.verifyUser, 
     (req, res, next) => {
         Repositories.find({})
             .populate('user')
             .then((repositories) => {
                 var user;
-                if(repositories){
+                if(repositories){ // check for repo based on id
                     user = repositories.filter(repo => repo.user._id.toString() === req.user.id.toString())[0];
                 if(!user) {
                     var err = new Error('You have no Repositories!');
                     err.status = 404;
                     return next(err);
                 }
-                Repositories.findByIdAndRemove(req.params.repositoryId)
+                Repositories.findByIdAndRemove(req.params.repositoryId) // find the repo and delete it
                 .populate('user')
                 .then((repository) => {
                     res.statusCode = 200;
@@ -174,7 +187,7 @@ repositoryRouter.route('/:repositoryId')
                 }, (err) => next(err));
                 
             }
-            else{
+            else{ // where there are no repos
                 var err = new Error('There are no repositories');
                 err.status = 404;
                 return next(err);
@@ -186,20 +199,20 @@ repositoryRouter.route('/:repositoryId')
 })
 
 
-//get all papers for specific repository
+//papers in particular repo based on repository id
 repositoryRouter.route('/:repositoryId/papers')
 .options(cors.corsWithOptions,(req,res) => { res.sendStatus(200); })
 .get(cors.cors, authenticate.verifyUser, (req,res,next) => {
     Repositories.findById(req.params.repositoryId)
     .populate('user')
-    .then((repository) => {
+    .then((repository) => { // searching for repo based on repo id and its permission
         if (repository != null && repository.user._id.toString() != req.user.id.toString()) {
             
             err = new Error('You are not authorized to view this repository');
             err.status = 403;
             return next(err);
         }
-            
+         // when not authorized
         else if (repository == null) {
             err = new Error('Repository ' + req.params.repositoryId + ' not found');
             err.status = 404;
@@ -213,8 +226,7 @@ repositoryRouter.route('/:repositoryId/papers')
     }, (err) => next(err))
     .catch((err) => next(err));
 })
-    //add new papers to existing repository
-.post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+.post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => { // adding a paper to a repo based on repo id
     Repositories.findById(req.params.repositoryId)
     .populate('user')
     .then((repository) => {
@@ -225,7 +237,7 @@ repositoryRouter.route('/:repositoryId/papers')
             repository.save()
             .then((repository) => {
                 Repositories.findById(repository._id)
-                .populate('papers.user')
+                .populate('papers.user') // adding the paper
                 .then((repository) => {
                     paper = repository.papers.id(repository.papers[repository.papers.length-1]._id)
                     console.log(paper);
@@ -235,7 +247,7 @@ repositoryRouter.route('/:repositoryId/papers')
                 })            
             }, (err) => next(err));
         }
-        else {
+        else { // when repo is not available
             err = new Error('Repository ' + req.params.repositoryId + ' not found');
             err.status = 404;
             return next(err);

@@ -1,45 +1,96 @@
-# se-project1) Unzip frontend and backend into same folder\\
-2)make sure you node version 10
-    I)MAC - one time installation(backend/conFusionServer) - go to backend/conFusionServer folder
-    a)install nvm :- "brew install nvm"
-    b)mkdir ~/.nvm 
-    c)export NVM_DIR="$HOME/.nvm"
-    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
-    [ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-    d)nvm install 10
-    e)nvm use 10  
-    f)"nvm list" :- should show node version 10
-    g)"node --version" :- check node version is 10.x.x
-    h)"npm --version" :- npm version should be 6.x.x
-    i)"npm install"
-    j)node_modules folder should be created
+# SE Project: Base
 
-    II)MAC  - One time installation(frontend) - go to frontend folder
-    a) source ~/.nvm/nvm.sh
-    b) nvm use 10   
-    c) npm install
-    d)node_modules folder should be created
+## Prerequisite (Unix: OSX/Linux)
+### Shell
+- OSX:   Terminal (pre-installed)
+- Linux: Terminal (pre-installed)
+### Git
+- Download [here](https://git-scm.com/downloads)
 
-3)Create keys - 
-    a)go to backend/conFusionServer/bin
-    b)openssl genrsa 1024 > private.key
-    c)openssl req -new -key private.key -out cert.csr
-    d)openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
+## Backend Installation (Unix: OSX/Linux)
+### Install MongoDB
+- Download [here](https://www.mongodb.com/docs/manual/installation/)
+### Clone the repository
+```
+cd ~
+gh repo clone purnasrivatsa96/se-project
+```
+### Install Node (Version >= 10)
+- Navigate backend directory in the repository
+```
+cd ~/se-project/backend/
+```
+- Install NVM
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+source ~/.bashrc
+```
+- Install Node version >= 10
+```
+nvm install 10
+nvm use 10
+nvm list # should show node version 10
+```
+- Verify package versions
+```
+node --version # version should be 10.x.x
+npm  --version # version should be  6.x.x
+```
+- Install required packages
+```
+npm install # should create a node_modules directory
+```
+## Frontend Installation (Unix: OSX/Linux)
+- Navigate frontend directory in the repository
+```
+cd ~/se-project/front-end/
+```
+- Install required packages
+```
+nvm use 10
+npm install # should create a node_modules directory
+```
+- Install Grunt
+```
+npm install grunt --save-dev
+```
 
-3)To run the app
-    a)go to frontend folder 
-        i)source ~/.nvm/nvm.sh
-        ii)nvm use 10
-        ii)grunt watch
-    b)go to backend/conFusionServer
-        i)source ~/.nvm/nvm.sh
-        ii)nvm use 10
-        iii)npm run watch
+## Generate keys (Unix: OSX/Linux)
+- Navigate to bin directory
+```
+cd ~/se-project/backend/bin
+```
+- Generate keys
+```
+openssl genrsa 1024 > private.key
+openssl req -new -key private.key -out cert.csr
+openssl x509 -req -in cert.csr -signkey private.key -out certificate.pem
+```
 
-    c)visit https://localhost/3443
+## Usage
+To run the app, open two terminal instances.
 
-
-
-
-
+In terminal instance 1:
+```
+cd ~/se-project/front-end
 source ~/.nvm/nvm.sh
+nvm use 10
+grunt watch
+```
+
+In terminal instance 2:
+```
+cd ~/se-project/backend
+source ~/.nvm/nvm.sh
+nvm use 10
+npm run watch
+```
+
+Visit `https://localhost:3443/login` in web-browser.
+
+## Support
+For any program-specific support, please contact any of the following:
+- Abhinav Sethi (abhinavsethi@vt.edu)
+- Gautam Sharma (gautams@vt.edu)
+- Nivishree Palvannan (nivipal@vt.edu)
+- Purna Srivatsa (purnasrivatsa@vt.edu)
