@@ -100,7 +100,7 @@ Visit `https://localhost:3443/login` in web-browser.
 
 ## Support
 For any program-specific support, please contact any of the following:
-- Abhinav Sethi (abhinavsethi@vt.edu)
-- Gautam Sharma (gautams@vt.edu)
-- Nivishree Palvannan (nivipal@vt.edu)
-- Purna Srivatsa (purnasrivatsa@vt.edu)
+- Abhinav Sethi (abhinavsethi@vt.edu, github: abhinav_vt)
+- Gautam Sharma (gautams@vt.edu, github: gtmshrm)
+- Nivishree Palvannan (nivipal@vt.edu, github: nivishree)
+- Purna Srivatsa (purnasrivatsa@vt.edu, github: purnasrivatsa96)
