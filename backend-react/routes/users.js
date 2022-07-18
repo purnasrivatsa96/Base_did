@@ -24,7 +24,7 @@ router.get('/',cors.corsWithOptions, authenticate.verifyUser, authenticate.verif
 // add new user with username and password
 router.post('/signup',cors.corsWithOptions,  (req, res, next) => {
   console.log("sign up request");
-  User.register(new User({username: req.body.username}), 
+  User.register(new User({username: req.body.username}),
     req.body.password, (err, user) => {
     if(err) {
       res.statusCode = 500;
@@ -36,6 +36,8 @@ router.post('/signup',cors.corsWithOptions,  (req, res, next) => {
         user.firstname = req.body.firstname;
       if (req.body.lastname)
         user.lastname = req.body.lastname;
+      if (req.body.emailID)
+        user.emailID = req.body.emailID;
       user.save((err, user) => {
         if (err) {
           res.statusCode = 500;
@@ -71,16 +73,16 @@ router.post('/login', cors.corsWithOptions, (req, res, next) => {
       if (err) {
         res.statusCode = 401;
         res.setHeader('Content-Type', 'application/json');
-        res.json({success: false, status: 'Login Unsuccessful!', err: 'Could not log in user!'});          
+        res.json({success: false, status: 'Login Unsuccessful!', err: 'Could not log in user!'});
         return next(err);;
       }
-      
+
       var token = authenticate.getToken({_id: req.user._id});
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       // res.render('index');
       res.json({success: true, status: 'Login Successful!', token: token,user: user});
-    }); 
+    });
   }) (req, res, next);
 });
 

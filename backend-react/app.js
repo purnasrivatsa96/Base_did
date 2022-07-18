@@ -2,12 +2,14 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const cors = require('cors');
 var logger = require('morgan');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var passport = require('passport');
 var authenticate = require('./authenticate');
 var config = require('./config');
+
 
 
 var usersRouter = require('./routes/users');
@@ -30,6 +32,10 @@ connect.then((db) => {
 },(err) => {console.log(err); });
 
 var app = express();
+
+app.use(cors({
+  origin: '*'
+}));
 
 // Secure traffic only
 app.all('*', (req, res, next) => {
@@ -56,10 +62,12 @@ app.use('/users', usersRouter);
 
 
 // app.use(express.static(path.join(__dirname, 'public')));
-
+//test
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  console.log(req);
+  res.json("Welcome to Base.");
 });
+
 
 app.use('/repositories', repositoryRouter);
 
